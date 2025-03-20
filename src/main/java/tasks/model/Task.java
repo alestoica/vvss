@@ -31,14 +31,14 @@ public class Task implements Serializable, Cloneable {
         this.start = time;
         this.end = time;
     }
-    public Task(String title, Date start, Date end, int interval){
+    public Task(String title, Date start, Date end, int interval) throws IllegalArgumentException{
         if (start.getTime() < 0 || end.getTime() < 0) {
             log.error("time below bound");
             throw new IllegalArgumentException("Time cannot be negative");
         }
         if (interval < 1) {
             log.error("interval < than 1");
-            throw new IllegalArgumentException("interval should me > 1");
+            throw new IllegalArgumentException("interval should me > 0");
         }
         this.title = title;
         this.start = start;
@@ -103,13 +103,11 @@ public class Task implements Serializable, Cloneable {
             if (current.before(start)){
                 return start;
             }
-            if ((current.after(start) || current.equals(start)) && (current.before(end) || current.equals(end))){
-                for (long i = start.getTime(); i <= end.getTime(); i += interval*1000){
-                    if (current.equals(timeAfter)) return new Date(timeAfter.getTime()+interval*1000);
-                    if (current.after(timeBefore) && current.before(timeAfter)) return timeBefore;//return timeAfter
-                    timeBefore = timeAfter;
-                    timeAfter = new Date(timeAfter.getTime()+ interval*1000);
-                }
+            for (long i = start.getTime(); i <= end.getTime(); i += interval * 1000) {
+                if (current.equals(timeAfter)) return new Date(timeAfter.getTime() + interval * 1000);
+                if (current.after(timeBefore) && current.before(timeAfter)) return timeAfter;
+                timeBefore = timeAfter;
+                timeAfter = new Date(timeAfter.getTime() + interval * 1000);
             }
         }
         if (!isRepeated() && current.before(time) && isActive()){
@@ -130,9 +128,7 @@ public class Task implements Serializable, Cloneable {
             String formattedInterval = TaskIO.getFormattedInterval(interval);
             return "Every " + formattedInterval;
         }
-        else {
-            return "No";
-        }
+        return "No";
     }
     @Override
     public boolean equals(Object o) {

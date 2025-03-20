@@ -11,7 +11,7 @@ import static java.util.Objects.isNull;
 public class LinkedTaskList  extends TaskList {
     private static final Logger log = Logger.getLogger(LinkedTaskList.class.getName());
     private class LinkedTaskListIterator implements Iterator<Task>{
-        private int cursor;
+        private int cursor = 0;
         private int lastCalled = -1;
 
         @Override
@@ -25,7 +25,12 @@ public class LinkedTaskList  extends TaskList {
                 log.error("next iterator element doesn't exist");
                 throw new NoSuchElementException("No next element");
             }
-            lastCalled = cursor;
+//            lastCalled = cursor;
+
+            if (lastCalled < cursor) {
+                cursor--;
+            }
+
             return getTask(cursor++);
         }
 
@@ -44,6 +49,11 @@ public class LinkedTaskList  extends TaskList {
 
     @Override
     public void add(Task task) {
+        if (isNull(task)) {
+            log.error("adding task that is null");
+            throw new NullPointerException("Task is null");
+        }
+
         numberOfTasks++;
         Node lastNode = last;
         Node newNode = new Node(task, lastNode);
@@ -55,6 +65,11 @@ public class LinkedTaskList  extends TaskList {
         if (isNull(task)) {
             log.error("removing task that doesn't exist");
             throw new NullPointerException("Task is null");
+        }
+
+        if (last == null) {
+            log.warn("Attempting to remove from an empty list");
+            return false;
         }
 
         Node cursor = last;
@@ -94,10 +109,10 @@ public class LinkedTaskList  extends TaskList {
 
     @Override
     public List<Task> getAll() {
-        LinkedList<Task> tks=new LinkedList<>();
+        LinkedList<Task> tasks=new LinkedList<>();
         for (Task t: this)
-            tks.add(t);
-        return tks;
+            tasks.add(t);
+        return tasks;
     }
 
     @Override
