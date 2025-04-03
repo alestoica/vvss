@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tasks.model.ArrayTaskList;
 import tasks.model.Task;
+import org.apache.log4j.Logger;
 import tasks.model.TasksOperations;
 
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.Date;
 public class TasksService {
 
     private ArrayTaskList tasks;
-
+    private static final Logger log = Logger.getLogger(TasksService.class.getName());
     public TasksService(ArrayTaskList tasks){
         this.tasks = tasks;
     }
@@ -50,5 +51,52 @@ public class TasksService {
         //Iterable<Task> filtered = tasks.incoming(start, end);
 
         return filtered;
+    }
+
+    public void saveTask(Task task) {
+        tasks.remove(task);
+        validateTask(task);
+        tasks.add(task);
+    }
+
+    public ArrayTaskList getTasks(){
+        return tasks;
+    }
+
+    public void clear(){
+        tasks = new ArrayTaskList();
+    }
+
+    public void validateTask(Task task){
+        Date start = task.getStartTime();
+        Date end = task.getEndTime();
+        int interval = task.getRepeatInterval();
+        String title = task.getTitle();
+
+        long LOWER_BOUND = 1577836800000L;     // 01.01.2020 00:00:00
+        long UPPER_BOUND = 2524607999000L;     // 31.12.2050 23:59:59
+
+        if (start.getTime() < LOWER_BOUND || end.getTime() < LOWER_BOUND) {
+            log.error("Time must not be before 1 Jan 2020");
+            throw new IllegalArgumentException("Time must not be before 1 Jan 2020");
+        }
+
+        if (start.getTime() > UPPER_BOUND || end.getTime() > UPPER_BOUND) {
+            log.error("Time must not be after 31 Dec 2050");
+            log.error("Start time: " + start.getTime() + " End time: " + end.getTime());
+            throw new IllegalArgumentException("Time must not be after 31 Dec 2050");
+        }
+        if (start.getTime() < 0 || end.getTime() < 0) {
+            log.error("Time cannot be negative");
+            throw new IllegalArgumentException("Time cannot be negative");
+        }
+        if (interval < 1) {
+            log.error("Interval should be > 1");
+            throw new IllegalArgumentException("interval should me > 1");
+        }
+        if (title.isEmpty() || title.length() > 255) {
+            log.error("Title is out of bounds");
+            throw new IllegalArgumentException("Title is out of bounds");
+        }
     }
 }

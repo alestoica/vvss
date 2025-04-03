@@ -4,3 +4,40 @@
 2025-02-22 16:46:09 INFO  NewEditController:89 - new/edit window initializing
 2025-02-22 16:46:36 INFO  NewEditController:89 - new/edit window initializing
 2025-02-22 16:47:33 INFO  NewEditController:89 - new/edit window initializing
+2025-04-03 21:34:14 ERROR TasksService:80 - Time must not be before 1 Jan 2020
+2025-04-03 21:34:14 ERROR Task:44 - title not good
+2025-04-03 21:35:36 ERROR TasksService:85 - Time must not be after 31 Dec 2050
+2025-04-03 21:35:36 ERROR TasksService:86 - Start time: 2524608000000 End time: 2524608000000
+2025-04-03 21:35:36 ERROR Task:44 - title not good
+2025-04-03 21:35:36 ERROR Task:44 - title not good
+2025-04-03 21:35:36 ERROR TasksService:80 - Time must not be before 1 Jan 2020
+2025-04-03 21:35:36 ERROR Task:36 - time below bound
+2025-04-03 21:35:36 ERROR Task:44 - title not good
+2025-04-03 21:42:27 ERROR Task:44 - title not good
+2025-04-03 21:42:55 ERROR Task:44 - title not good
+2025-04-03 21:44:03 ERROR Task:36 - time below bound
+2025-04-03 21:58:28 ERROR Task:36 - time below bound
+2025-04-03 21:58:28 ERROR Task:44 - title not good
+2025-04-03 21:58:28 ERROR TasksService:85 - Time must not be after 31 Dec 2050
+2025-04-03 21:58:28 ERROR TasksService:86 - Start time: 2524608000000 End time: 2524608000000
+2025-04-03 21:58:28 ERROR Task:44 - title not good
+2025-04-03 21:58:28 ERROR Task:44 - title not good
+2025-04-03 21:58:28 ERROR TasksService:80 - Time must not be before 1 Jan 2020
+2025-04-03 21:58:39 ERROR Task:36 - time below bound
+2025-04-03 21:58:39 ERROR Task:44 - title not good
+2025-04-03 21:58:39 ERROR TasksService:85 - Time must not be after 31 Dec 2050
+2025-04-03 21:58:39 ERROR TasksService:86 - Start time: 2524608000000 End time: 2524608000000
+2025-04-03 21:58:39 ERROR Task:44 - title not good
+2025-04-03 21:58:39 ERROR Task:44 - title not good
+2025-04-03 21:58:39 ERROR TasksService:80 - Time must not be before 1 Jan 2020
+2025-04-03 22:01:51 ERROR Task:44 - title not good
+2025-04-03 22:01:58 ERROR Task:36 - time below bound
+2025-04-03 22:01:58 ERROR Task:44 - title not good
+2025-04-03 22:01:58 ERROR TasksService:85 - Time must not be after 31 Dec 2050
+2025-04-03 22:01:58 ERROR TasksService:86 - Start time: 2524608000000 End time: 2524608000000
+2025-04-03 22:01:58 ERROR Task:44 - title not good
+2025-04-03 22:01:58 ERROR Task:44 - title not good
+2025-04-03 22:01:58 ERROR TasksService:80 - Time must not be before 1 Jan 2020
+2025-04-03 22:02:16 ERROR Task:44 - title not good
+2025-04-03 22:03:00 ERROR Task:44 - title not good
+2025-04-03 22:03:07 ERROR Task:44 - title not good
