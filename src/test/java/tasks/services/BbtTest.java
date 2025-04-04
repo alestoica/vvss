@@ -35,7 +35,6 @@ public class BbtTest {
             Task task = new Task("", new Date(2024, Calendar.JANUARY, 1), new Date(2024, Calendar.JANUARY, 1), 1);
             service.saveTask(task);
         } );
-
     }
 
     // BVA Valid

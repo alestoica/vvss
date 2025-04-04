@@ -92,7 +92,7 @@ public class TasksService {
         }
         if (interval < 1) {
             log.error("Interval should be > 1");
-            throw new IllegalArgumentException("interval should me > 1");
+            throw new IllegalArgumentException("Interval should be > 1");
         }
         if (title.isEmpty() || title.length() > 255) {
             log.error("Title is out of bounds");
