@@ -44,6 +44,7 @@ public class Task implements Serializable, Cloneable {
             log.error("title not good");
             throw new IllegalArgumentException("Title is out of bounds");
         }
+        this.active = true;
         this.title = title;
         this.start = start;
         this.end = end;
@@ -75,6 +76,10 @@ public class Task implements Serializable, Cloneable {
         this.start = time;
         this.end = time;
         this.interval = 0;
+    }
+
+    public Task getTask() {
+        return new Task("Title", new Date(0), new Date(1), 2);
     }
 
     public Date getStartTime() {

@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1250"> 
+  <title>Coverage Report > Controller</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">tasks.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: Controller (tasks.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Controller</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package tasks.controller;
+&nbsp;
+&nbsp;import javafx.collections.FXCollections;
+&nbsp;import javafx.collections.ListChangeListener;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import javafx.event.ActionEvent;
+&nbsp;import javafx.fxml.FXML;
+&nbsp;import javafx.fxml.FXMLLoader;
+&nbsp;import javafx.scene.Parent;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.control.*;
+&nbsp;import javafx.scene.control.cell.PropertyValueFactory;
+&nbsp;import javafx.stage.Modality;
+&nbsp;import javafx.stage.Stage;
+&nbsp;import org.apache.log4j.Logger;
+&nbsp;import tasks.model.Task;
+&nbsp;import tasks.services.DateService;
+&nbsp;import tasks.services.TaskIO;
+&nbsp;import tasks.services.TasksService;
+&nbsp;import tasks.view.Main;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Date;
+&nbsp;
+<b class="nc">&nbsp;public class Controller {</b>
+<b class="nc">&nbsp;    private static final Logger log = Logger.getLogger(Controller.class.getName());</b>
+&nbsp;    public ObservableList&lt;Task&gt; tasksList;
+&nbsp;    TasksService service;
+&nbsp;    DateService dateService;
+&nbsp;
+&nbsp;    public static Stage editNewStage;
+&nbsp;    public static Stage infoStage;
+&nbsp;
+&nbsp;    public static TableView mainTable;
+&nbsp;
+&nbsp;    @FXML
+&nbsp;    public  TableView tasks;
+&nbsp;    @FXML
+&nbsp;    private TableColumn&lt;Task, String&gt; columnTitle;
+&nbsp;    @FXML
+&nbsp;    private TableColumn&lt;Task, String&gt; columnTime;
+&nbsp;    @FXML
+&nbsp;    private TableColumn&lt;Task, String&gt; columnRepeated;
+&nbsp;    @FXML
+&nbsp;    private Label labelCount;
+&nbsp;    @FXML
+&nbsp;    private DatePicker datePickerFrom;
+&nbsp;    @FXML
+&nbsp;    private TextField fieldTimeFrom;
+&nbsp;    @FXML
+&nbsp;    private DatePicker datePickerTo;
+&nbsp;    @FXML
+&nbsp;    private TextField fieldTimeTo;
+&nbsp;
+&nbsp;    public void setService(TasksService service){
+<b class="nc">&nbsp;        this.service=service;</b>
+<b class="nc">&nbsp;        this.dateService=new DateService(service);</b>
+<b class="nc">&nbsp;        this.tasksList=service.getObservableList();</b>
+<b class="nc">&nbsp;        updateCountLabel(tasksList);</b>
+<b class="nc">&nbsp;        tasks.setItems(tasksList);</b>
+<b class="nc">&nbsp;        mainTable = tasks;</b>
+&nbsp;
+<b class="nc">&nbsp;        tasksList.addListener((ListChangeListener.Change&lt;? extends Task&gt; c) -&gt; {</b>
+<b class="nc">&nbsp;                    updateCountLabel(tasksList);</b>
+<b class="nc">&nbsp;                    tasks.setItems(tasksList);</b>
+&nbsp;                }
+&nbsp;        );
+&nbsp;    }
+&nbsp;
+&nbsp;    @FXML
+&nbsp;    public void initialize(){
+<b class="nc">&nbsp;        log.info(&quot;Main controller initializing&quot;);</b>
+<b class="nc">&nbsp;        columnTitle.setCellValueFactory(new PropertyValueFactory&lt;&gt;(&quot;title&quot;));</b>
+<b class="nc">&nbsp;        columnTime.setCellValueFactory(new PropertyValueFactory&lt;&gt;(&quot;formattedDateStart&quot;));</b>
+<b class="nc">&nbsp;        columnRepeated.setCellValueFactory(new PropertyValueFactory&lt;&gt;(&quot;formattedRepeated&quot;));</b>
+&nbsp;    }
+&nbsp;    private void updateCountLabel(ObservableList&lt;Task&gt; list){
+<b class="nc">&nbsp;        labelCount.setText(list.size()+ &quot; elements&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @FXML
+&nbsp;    public void showTaskDialog(ActionEvent actionEvent){
+<b class="nc">&nbsp;        Object source = actionEvent.getSource();</b>
+<b class="nc">&nbsp;        NewEditController.setClickedButton((Button) source);</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            editNewStage = new Stage();</b>
+<b class="nc">&nbsp;            NewEditController.setCurrentStage(editNewStage);</b>
+<b class="nc">&nbsp;            FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;/fxml/new-edit-task.fxml&quot;));</b>
+<b class="nc">&nbsp;            Parent root = loader.load();//getClass().getResource(&quot;/fxml/new-edit-task.fxml&quot;));</b>
+<b class="nc">&nbsp;            NewEditController editCtrl = loader.getController();</b>
+<b class="nc">&nbsp;            editCtrl.setService(service);</b>
+<b class="nc">&nbsp;            editCtrl.setTasksList(tasksList);</b>
+<b class="nc">&nbsp;            editCtrl.setCurrentTask((Task)mainTable.getSelectionModel().getSelectedItem());</b>
+<b class="nc">&nbsp;            editNewStage.setScene(new Scene(root, 600, 350));</b>
+<b class="nc">&nbsp;            editNewStage.setResizable(false);</b>
+<b class="nc">&nbsp;            editNewStage.initOwner(Main.primaryStage);</b>
+<b class="nc">&nbsp;            editNewStage.initModality(Modality.APPLICATION_MODAL);//??????</b>
+<b class="nc">&nbsp;            editNewStage.show();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (IOException e){</b>
+<b class="nc">&nbsp;            log.error(&quot;Error loading new-edit-task.fxml&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    @FXML
+&nbsp;    public void deleteTask(){
+<b class="nc">&nbsp;        Task toDelete = (Task)tasks.getSelectionModel().getSelectedItem();</b>
+<b class="nc">&nbsp;        tasksList.remove(toDelete);</b>
+<b class="nc">&nbsp;        TaskIO.rewriteFile(tasksList);</b>
+&nbsp;    }
+&nbsp;    @FXML
+&nbsp;    public void showDetailedInfo(){
+&nbsp;        try {
+<b class="nc">&nbsp;            Stage stage = new Stage();</b>
+<b class="nc">&nbsp;            FXMLLoader loader =new FXMLLoader(getClass().getResource(&quot;/fxml/task-info.fxml&quot;));</b>
+<b class="nc">&nbsp;            Parent root = loader.load();</b>
+<b class="nc">&nbsp;            stage.setScene(new Scene(root, 550, 350));</b>
+<b class="nc">&nbsp;            stage.setResizable(false);</b>
+<b class="nc">&nbsp;            stage.setTitle(&quot;Info&quot;);</b>
+<b class="nc">&nbsp;            stage.initModality(Modality.APPLICATION_MODAL);//??????</b>
+<b class="nc">&nbsp;            infoStage = stage;</b>
+<b class="nc">&nbsp;            stage.show();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (IOException e){</b>
+<b class="nc">&nbsp;            log.error(&quot;error loading task-info.fxml&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    @FXML
+&nbsp;    public void showFilteredTasks(){
+<b class="nc">&nbsp;        Date start = getDateFromFilterField(datePickerFrom.getValue(), fieldTimeFrom.getText());</b>
+<b class="nc">&nbsp;        Date end = getDateFromFilterField(datePickerTo.getValue(), fieldTimeTo.getText());</b>
+&nbsp;
+<b class="nc">&nbsp;        Iterable&lt;Task&gt; filtered =  service.filterTasks(start, end);</b>
+&nbsp;
+<b class="nc">&nbsp;        ObservableList&lt;Task&gt; observableTasks = FXCollections.observableList((ArrayList)filtered);</b>
+<b class="nc">&nbsp;        tasks.setItems(observableTasks);</b>
+<b class="nc">&nbsp;        updateCountLabel(observableTasks);</b>
+&nbsp;    }
+&nbsp;    private Date getDateFromFilterField(LocalDate localDate, String time){
+<b class="nc">&nbsp;        Date date = dateService.getDateValueFromLocalDate(localDate);</b>
+<b class="nc">&nbsp;        return dateService.getDateMergedWithTime(time, date);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void resetFilteredTasks(){
+<b class="nc">&nbsp;        tasks.setItems(tasksList);</b>
+&nbsp;        //abc
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-05-03 21:44</div>
+</div>
+</body>
+</html>

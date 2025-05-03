@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1250"> 
+  <title>Coverage Report > Notificator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">tasks.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: Notificator (tasks.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Notificator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package tasks.controller;
+&nbsp;
+&nbsp;import javafx.application.Platform;
+&nbsp;import javafx.collections.ObservableList;
+&nbsp;import org.apache.log4j.Logger;
+&nbsp;import org.controlsfx.control.Notifications;
+&nbsp;import tasks.model.Task;
+&nbsp;
+&nbsp;import java.util.Date;
+&nbsp;
+&nbsp;public class Notificator extends Thread {
+&nbsp;
+&nbsp;    private static final int millisecondsInSec = 1000;
+&nbsp;    private static final int secondsInMin = 60;
+&nbsp;
+<b class="nc">&nbsp;    private static final Logger log = Logger.getLogger(Notificator.class.getName());</b>
+&nbsp;
+&nbsp;    private ObservableList&lt;Task&gt; tasksList;
+&nbsp;
+<b class="nc">&nbsp;    public Notificator(ObservableList&lt;Task&gt; tasksList){</b>
+<b class="nc">&nbsp;        this.tasksList=tasksList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void run() {
+<b class="nc">&nbsp;        Date currentDate = new Date();</b>
+&nbsp;        while (true) {
+&nbsp;
+<b class="nc">&nbsp;            for (Task t : tasksList) {</b>
+<b class="nc">&nbsp;                if (t.isActive()) {</b>
+<b class="nc">&nbsp;                    if (t.isRepeated() &amp;&amp; t.getEndTime().after(currentDate)){</b>
+&nbsp;
+<b class="nc">&nbsp;                        Date next = t.nextTimeAfter(currentDate);</b>
+<b class="nc">&nbsp;                        long currentMinute = getTimeInMinutes(currentDate);</b>
+<b class="nc">&nbsp;                        long taskMinute = getTimeInMinutes(next);</b>
+<b class="nc">&nbsp;                        if (currentMinute == taskMinute){</b>
+<b class="nc">&nbsp;                            showNotification(t);</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                    }</b>
+&nbsp;                    else {
+<b class="nc">&nbsp;                        if (!t.isRepeated()){</b>
+<b class="nc">&nbsp;                            if (getTimeInMinutes(currentDate) == getTimeInMinutes(t.getTime())){</b>
+<b class="nc">&nbsp;                                showNotification(t);</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;            }</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                Thread.sleep(millisecondsInSec*secondsInMin);</b>
+&nbsp;
+<b class="nc">&nbsp;            } catch (InterruptedException e) {</b>
+<b class="nc">&nbsp;                log.error(&quot;thread interrupted exception&quot;);</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            currentDate = new Date();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public static void showNotification(Task task){
+<b class="nc">&nbsp;        log.info(&quot;push notification showing&quot;);</b>
+<b class="nc">&nbsp;        Platform.runLater(() -&gt; {</b>
+<b class="nc">&nbsp;            Notifications.create().title(&quot;Task reminder&quot;).text(&quot;It&#39;s time for &quot; + task.getTitle()).showInformation();</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;    private static long getTimeInMinutes(Date date){
+<b class="nc">&nbsp;        return date.getTime()/millisecondsInSec/secondsInMin;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-05-03 21:44</div>
+</div>
+</body>
+</html>
