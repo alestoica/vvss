@@ -113,6 +113,12 @@
         <version>2.22.1</version>
         <configuration>
           <!--                <failIfNoTests>false</failIfNoTests>-->
+          <argLine>
+            --add-opens tasks/tasks.model=ALL-UNNAMED
+            --add-opens tasks/tasks.services=ALL-UNNAMED
+            --add-opens tasks/tasks.integration=ALL-UNNAMED
+            --add-opens tasks/tasks.unit=ALL-UNNAMED
+          </argLine>
         </configuration>
       </plugin>
       <plugin>
