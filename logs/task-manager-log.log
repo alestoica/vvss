@@ -89,3 +89,8 @@
 2025-05-03 21:44:20 ERROR Task:36 - time below bound
 2025-05-03 21:44:20 ERROR Task:36 - time below bound
 2025-05-03 21:44:20 ERROR Task:40 - interval < than 1
+2025-05-05 19:41:28 ERROR Task:26 - time below bound
+2025-05-05 19:41:28 ERROR Task:44 - title not good
+2025-05-05 19:41:28 ERROR Task:36 - time below bound
+2025-05-05 19:41:28 ERROR Task:36 - time below bound
+2025-05-05 19:41:28 ERROR Task:40 - interval < than 1
