@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>testspec Proiect236 - sbir3430_IntT</title>
+<link type="text/css" rel="stylesheet" href="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/css/tl_documents.css" />
+<style type="text/css" media="print">.notprintable { display:none;}</style>
+</head>
+<body>
+<div>
+<div style="float:right;">TestLink Community [configure $tlCfg-&gt;document_generator-&gt;company_name]</div>
+<div>&nbsp;</div><hr />
+<p style="text-align: center;"><img alt="TestLink logo" title="configure using $tlCfg->document_generator->company_logo"  width= height= src="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/images/tl-logo-transparent-25.png" /></p></div>
+<div class="doc_title"><p>Test Specification</p></div>
+<div class="doc_title" style="text-align:left;margin: auto;"><p>Test Project: Proiect236<br/>Test Suite: Proiect236 - sbir3430_IntT</p></div>
+<div class="summary"><p id="printedby">Printed by TestLink on 05/05/2025</p></div>
+<div class="pagefooter" id="copyright">2012 &copy; TestLink Community</div>
+<h1 class="general" style="page-break-before: always">Table Of Contents</h1><div class="toc"><p style="padding-left: 20px;"><b><a href="#toc_1">1.sbir3430_IntT</a></b></p>
+<p style="padding-left: 45px;"><a href="#toc_tc26088">Prj236-78: IntT-TopDown-Unit</a></p><p style="padding-left: 45px;"><a href="#toc_tc26090">Prj236-79: IntT-TopDown-Partial</a></p><p style="padding-left: 45px;"><a href="#toc_tc26092">Prj236-80: IntT-TopDown-Full</a></p></div><h1 class="doclevel" >Scope</h1>
+<div class="txtlevel"><p>Proiect de testare pentru studentii din grupa 236.</p></div>
+ <br/><a name='toc_1'></a>
+<h1 class='doclevel'>1.Test Suite : sbir3430_IntT</h1>
+<div><p>Suita&nbsp;de teste de tip Integration Testing Top Down pentru proiectul cu task-uri.</p>
+</div><a name="toc_tc26088"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case Prj236-78: IntT-TopDown-Unit&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">BogdanStoica</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Test unitar pentru constructorul clasei Task.</p>
+
+<p>Acest caz de test verifica&nbsp;comportamentul constructorului clasei Task.</p>
+
+<p>Se asigura&nbsp;ca, pentru valori de intrare valide, obiectul Task este creat corect, iar pentru valori invalide se arunca&nbsp;exceptia IllegalArgumentException conform asteptarilor.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.unit.ETestTask</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >tasks.unit.ETestTask#Test1_TestConstructor</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">sbir3430_F01:  Adaugarea unui task nou [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc26090"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case Prj236-79: IntT-TopDown-Partial&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">BogdanStoica</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Acest caz de test verifica&nbsp;integrarea partiala&nbsp;intre modulele task si tasksService, in cadrul unei abordari top-down.</p>
+
+<p>Al treilea modul (care ar putea gestiona afisarea sau persistarea datelor) este inlocuit cu un mock, astfel incat sa&nbsp;fie posibila&nbsp;testarea interactiunii dintre primele doua&nbsp;module fara&nbsp;dependenae externe.</p>
+
+<p>Se testeaza&nbsp;daca&nbsp;lista observabila&nbsp;returnata&nbsp;de tasksService conaine corect obiectul Task adaugat.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithDomainTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithDomainTest#Test1_getObservableList</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">sbir3430_F01:  Adaugarea unui task nou [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc26092"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case Prj236-80: IntT-TopDown-Full&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">BogdanStoica</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Acest caz de test valideaza&nbsp;integrarea completa&nbsp;intre modulele implicate in procesul de obtinere si formatare a intervalului de repetare a unei sarcini (Task).</p>
+
+<p>Testul verifica&nbsp;daca&nbsp;metoda getIntervalInHours() din tasksService converteste corect valoarea returnata de&nbsp;getRepeatInterval() a unui obiect Task intr-un format de timp de tip &quot;hh:mm&quot;.</p>
+
+<p>Se simuleaza&nbsp;un obiect Task pentru a controla valoarea intervalului, iar rezultatul este comparat cu formatul asteptat.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithoutDomainTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >tasks.integration.TaskIntegrationWithoutDomainTest#Test2_getIntervalInHours</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">sbir3430_F01:  Adaugarea unui task nou [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+
+</body>
+</html>
